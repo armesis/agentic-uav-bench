@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .config import Config
 from .interfaces import EXECUTORS, freeform_command_doc
-from .llm import make_backend, FatalAPIError
+from .llm import make_backend, FatalAPIError, ContextOverflow
 from .pricing import cost_usd
 from .missions import MISSIONS, safety_metrics
 from .sim import SITL
@@ -55,7 +55,11 @@ async def llm_agent(cond, mission, backend, ex, cfg, rec, stats):
     for _ in range(cfg.limits.max_llm_calls):
         if time.monotonic() > t_end:
             return "time_limit"
-        turn = await backend.step()
+        try:
+            turn = await backend.step()
+        except ContextOverflow as err:
+            rec({"type": "llm_error", "t": ex.v.now(), "error": str(err)[:300]})
+            return "context_overflow"
         stats["llm"].append(turn.latency_s)
         stats["tok_in"] += turn.in_tok
         stats["tok_cached"] += turn.cached_tok
@@ -184,7 +188,7 @@ async def run_one(cfg: Config, cond: str, mission_id: str, provider: str, model:
     t_wall0 = time.monotonic()
     try:
         sitl.start()
-        v = Vehicle(cfg, grpc_port=50051)
+        v = Vehicle(cfg, grpc_port=cfg.sim.grpc_port)
         await asyncio.wait_for(v.connect(), cfg.sim.boot_timeout_s)
         ex = EXECUTORS[cond](v, cfg, rec)
         inj = asyncio.create_task(mission.injector(v, cfg, rec)) if mission.injector else None

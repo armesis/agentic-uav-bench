@@ -14,9 +14,17 @@ class SimConfig:
     # Keep 1.0: LLM latency is wall-clock, so speeding up the sim would let the
     # vehicle travel further while the model "thinks" and confound latency effects.
     speed_factor: float = 1.0
-    mavlink_url: str = "udpin://0.0.0.0:14540"
+    instance: int = 0                 # parallel batches: one instance number each (0, 1, ...)
     boot_timeout_s: float = 120.0
     ready_timeout_s: float = 90.0
+
+    @property
+    def mavlink_url(self) -> str:
+        return f"udpin://0.0.0.0:{14540 + self.instance}"
+
+    @property
+    def grpc_port(self) -> int:
+        return 50051 + self.instance
 
 
 @dataclass

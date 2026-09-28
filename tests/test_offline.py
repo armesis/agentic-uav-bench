@@ -129,6 +129,20 @@ async def main():
     expect(s, "n_no_action", 3)
     expect(s, "termination", "step_limit")
 
+    print("context overflow -> counted as agent failure, not harness error:")
+    from bench.llm import ContextOverflow
+
+    class Overflow(ScriptBackend):
+        async def step(self):
+            if self.i >= 1:
+                raise ContextOverflow("context length exceeded")
+            return await super().step()
+    CFG.limits.max_llm_calls = 40
+    agent.make_backend = lambda *a, **k: Overflow([[("arm", {})]])
+    s = await agent.run_one(CFG, "B", "M1", "lmstudio", "mockCtx", 0, out)
+    expect(s, "termination", "context_overflow")
+    expect(s, "success", False)
+
     shutil.rmtree(out)
     print(f"\n{'ALL PASSED' if fails == 0 else f'{fails} FAILED'}")
     return fails

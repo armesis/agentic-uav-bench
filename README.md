@@ -46,7 +46,32 @@ should land around $1. `gpt-5.x` models are sent `reasoning_effort=none` automat
 for function tools, and it keeps per-decision latency low for real-time control. A quota/auth error stops the batch
 instead of burning through runs.
 
-Local small model (optional second factor): `ollama pull qwen2.5:7b`, then `--provider ollama --model qwen2.5:7b`.
+### Local model via LM Studio (second factor)
+
+1. In LM Studio, download a model with **native tool-calling support** (e.g. Qwen2.5-7B-Instruct, Qwen3-8B, Mistral-Nemo-Instruct-12B).
+2. Load it with **context length >= 16384**. The default (4096) is too small: a 20-step mission overflows it.
+   An overflow is recorded as `termination=context_overflow` and counts as a failed run, not a harness error.
+3. Developer tab -> Start Server (default `http://localhost:1234/v1`).
+4. Use the **model identifier LM Studio shows** (e.g. `qwen2.5-7b-instruct`) as `--model`.
+5. Qwen3: turn thinking off (LM Studio toggle, or the model will spend seconds reasoning at every control step).
+
+Report the model, the quantization (e.g. Q4_K_M) and the GPU in the paper: local latency depends on the hardware.
+
+### Parallel batches (cloud model + local model at the same time)
+
+Give each batch its own `--instance`. Every instance gets its own PX4 instance, MAVLink port (14540+N),
+mavsdk_server port (50051+N) and Gazebo partition (`GZ_PARTITION=bench_N`), and cleans up only its own processes.
+
+```bash
+# terminal 1
+python run.py --instance 0 --provider openai   --model gpt-5.6-luna        --reps 10
+# terminal 2
+python run.py --instance 1 --provider lmstudio --model qwen2.5-7b-instruct --reps 10
+```
+
+Before launching both batches, smoke-test parallelism with two simultaneous oracle runs (`--provider scripted --model oracle
+--missions M1 --reps 1 --out smoke0` / `--instance 1 ... --out smoke1`). Watch CPU: if two Gazebo servers plus local
+inference push the sim below real time, go sequential. A slow sim would confound the latency results.
 
 Each run writes `results/<model>__<cond>__<mission>__rNN/`: `summary.json`, `events.jsonl` (every LLM call and command),
 `telemetry.csv` (5 Hz), `transcript.json`, `px4.log`.

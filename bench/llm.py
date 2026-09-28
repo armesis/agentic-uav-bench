@@ -34,6 +34,10 @@ FATAL_MARKERS = ("insufficient_quota", "invalid_api_key", "billing", "exceeded y
                  "model_not_found", "does not exist")
 
 
+class ContextOverflow(RuntimeError):
+    """Conversation no longer fits the model's context window: an agent failure, not a harness error."""
+
+
 class OpenAIBackend:
     def __init__(self, model, system, first_user, use_tools, base_url=None,
                  api_key=None, temperature=0.7, max_tokens=1024, reasoning_effort=None):
@@ -76,6 +80,8 @@ class OpenAIBackend:
                 low = msg.lower()
                 if any(k in low for k in FATAL_MARKERS):
                     raise FatalAPIError(msg) from ex
+                if "context" in low and any(k in low for k in ("length", "overflow", "exceed", "too long", "n_ctx")):
+                    raise ContextOverflow(msg) from ex
                 # adapt to endpoint quirks, then retry immediately
                 if "max_completion_tokens" in msg and "max_completion_tokens" in kw:
                     kw["max_tokens"] = kw.pop("max_completion_tokens")
@@ -184,6 +190,7 @@ PRESETS = {
     # name: (backend, base_url, api_key_env)
     "openai": ("openai", None, None),
     "ollama": ("openai", "http://localhost:11434/v1", "ollama"),
+    "lmstudio": ("openai", "http://localhost:1234/v1", "lm-studio"),
     "gemini": ("openai", "https://generativelanguage.googleapis.com/v1beta/openai/", None),
     "openrouter": ("openai", "https://openrouter.ai/api/v1", None),
     "anthropic": ("anthropic", None, None),
@@ -194,8 +201,8 @@ def make_backend(provider, model, system, first_user, use_tools, temperature=0.7
                  base_url=None, api_key=None, reasoning_effort=None):
     import os
     kind, default_url, key = PRESETS[provider]
-    if provider == "ollama":
-        api_key = api_key or "ollama"
+    if provider in ("ollama", "lmstudio"):
+        api_key = api_key or key
     elif provider == "gemini":
         api_key = api_key or os.environ.get("GEMINI_API_KEY")
     elif provider == "openrouter":

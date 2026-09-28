@@ -26,7 +26,7 @@ from bench.config import CFG
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--provider", required=True,
-                    choices=["openai", "anthropic", "ollama", "gemini", "openrouter", "scripted"])
+                    choices=["openai", "anthropic", "lmstudio", "ollama", "gemini", "openrouter", "scripted"])
     ap.add_argument("--model", required=True)
     ap.add_argument("--conditions", default="A,B,C")
     ap.add_argument("--missions", default="M1,M2,M3,M4")
@@ -41,6 +41,8 @@ def main():
     ap.add_argument("--budget-usd", type=float, default=4.0,
                     help="stop the batch when spend for this model (all runs in --out) reaches this")
     ap.add_argument("--px4-dir", default=None)
+    ap.add_argument("--instance", type=int, default=0,
+                    help="SITL instance for parallel batches (0, 1, ...): separate ports + Gazebo partition")
     ap.add_argument("--seed", type=int, default=1234)
     ap.add_argument("--no-shuffle", action="store_true")
     ap.add_argument("--retry-errors", action="store_true", help="re-run runs that ended in harness_error")
@@ -48,6 +50,7 @@ def main():
 
     if args.px4_dir:
         CFG.sim.px4_dir = args.px4_dir
+    CFG.sim.instance = args.instance
     temp = None if args.temperature < 0 else args.temperature
     conds = args.conditions.split(",")
     missions = args.missions.split(",")
