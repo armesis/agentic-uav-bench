@@ -5,4 +5,5 @@ results/
 paper_out/
 *.zip
 PX4-Autopilot/
-smoke/
+smoke*/
+pilot_*/

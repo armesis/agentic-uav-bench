@@ -38,6 +38,8 @@ def main():
     ap.add_argument("--base-url", default=None)
     ap.add_argument("--reasoning-effort", default=None,
                     help="none|low|medium|high; default: 'none' for gpt-5.x/6 (required for tools on chat API)")
+    ap.add_argument("--model-notes", default=None,
+                    help="free text stored in every summary.json, e.g. 'reasoning off, Q4_K_M, RTX 3050 6GB'")
     ap.add_argument("--budget-usd", type=float, default=4.0,
                     help="stop the batch when spend for this model (all runs in --out) reaches this")
     ap.add_argument("--px4-dir", default=None)
@@ -83,7 +85,8 @@ def main():
                 continue
         s = asyncio.run(run_one(CFG, c, m, args.provider, args.model, r, out,
                                 temperature=temp, base_url=args.base_url,
-                                reasoning_effort=args.reasoning_effort))
+                                reasoning_effort=args.reasoning_effort,
+                                model_notes=args.model_notes))
         done_now += 1
         el = (time.time() - t0) / 60
         cost = spent()

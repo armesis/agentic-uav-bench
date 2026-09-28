@@ -171,6 +171,11 @@ class Vehicle:
         return await self._do("arm", self.drone.action.arm())
 
     async def takeoff(self, alt: float):
+        # A takeoff sent before the armed state has settled (arm ACK arrives first) makes
+        # PX4 ignore the requested altitude and climb to the 2.5 m default. Wait for it.
+        t_end = time.monotonic() + 3.0
+        while not self.s["armed"] and time.monotonic() < t_end:
+            await asyncio.sleep(0.1)
         try:
             await self.drone.action.set_takeoff_altitude(float(alt))
         except Exception as ex:
