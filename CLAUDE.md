@@ -36,3 +36,17 @@ Also check: AeroGen (arXiv 2603.14236), Koubaa & Gabr (arXiv 2509.13352), "Takin
   if a change is needed, bump a version tag in `summary.json` and re-run everything.
 - Keep `speed_factor = 1.0` (LLM latency is wall-clock).
 - Harness errors are excluded from stats; agent failures (timeouts, context overflow) are not.
+
+## PX4-Autopilot is a shared-store worktree (heads-up, 2026-09-28)
+
+`PX4-Autopilot/` here is a **git linked worktree**, not a standalone clone. Its `.git` is a *file* pointing into the
+single shared store `~/.local/share/px4/PX4-Autopilot.git`, which other projects' PX4 worktrees also use
+(see `~/.local/share/px4/README.md`). Branch: `agentic-uav-bench`.
+- **Stock PX4 v1.17.0, unpatched.** The paper claims stock PX4: never apply px4_ws's HIL/GZBridge patches here, and
+  never point `PX4_DIR` at px4_ws's build. Record the PX4 tag/commit in results if it ever changes.
+- Edit, build and commit freely: files, `build/` and the branch are private to this project.
+- **Do not** `rm -rf PX4-Autopilot`, re-clone it, or replace `.git`: use `git worktree remove` / `git worktree add`.
+- **Do not** touch `~/.local/share/px4/PX4-Autopilot.git`, check out `main` here (it's reserved), or run
+  `git gc --prune=now` / `git worktree prune` in the store without checking every worktree.
+- Moved this project folder? Run `git worktree repair` inside `PX4-Autopilot/`.
+- `git fetch` updates the shared store for all projects; rebasing/merging only affects this branch.

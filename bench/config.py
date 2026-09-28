@@ -5,8 +5,10 @@ import os
 
 @dataclass
 class SimConfig:
-    # Path to your PX4-Autopilot checkout (must already be built once with `make px4_sitl`)
-    px4_dir: str = os.path.expanduser(os.environ.get("PX4_DIR", "~/PX4-Autopilot"))
+    # Path to your PX4-Autopilot checkout (must already be built once with `make px4_sitl`).
+    # Default: the stock v1.17.0 worktree inside this repo (see CLAUDE.md).
+    px4_dir: str = os.path.expanduser(os.environ.get(
+        "PX4_DIR", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "PX4-Autopilot")))
     airframe_autostart: str = "4001"          # gz_x500
     sim_model: str = "gz_x500"
     world: str = "default"
