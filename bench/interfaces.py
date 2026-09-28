@@ -228,7 +228,11 @@ class GuardedExecutor(Executor):
             return {"ok": False, "category": "autopilot_reject", "message": msg}
 
         # ---- blocking semantics
-        if name == "takeoff":
+        if name == "arm":
+            # the ACK arrives before the armed flag reaches telemetry; block until it does
+            st = await self._block(lambda: self.v.s["armed"], 5, interruptible=False)
+            msg = f"arm {st}"
+        elif name == "takeoff":
             tgt = a["altitude_m"]
             st = await self._block(lambda: abs(self.v.s["alt"] - tgt) < 1.0 and self.v.s["in_air"], 40)
             msg = f"takeoff {st}"

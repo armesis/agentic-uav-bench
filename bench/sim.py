@@ -99,6 +99,10 @@ class SITL:
             "PX4_GZ_WORLD": self.cfg.world,
             "PX4_SIM_SPEED_FACTOR": str(self.cfg.speed_factor),
             "GZ_PARTITION": f"bench_{self.instance}",
+            # A stale source-built gz-transport 13.4.1 in /usr/local/lib shadows the apt 13.6 that
+            # gz-sim 8.15 needs (undefined Node::Subscriber symbol). Prefer the system copy.
+            "LD_LIBRARY_PATH": ":".join(filter(None, ["/usr/lib/x86_64-linux-gnu",
+                                                      env.get("LD_LIBRARY_PATH")])),
         })
         if self.cfg.headless:
             env["HEADLESS"] = "1"
