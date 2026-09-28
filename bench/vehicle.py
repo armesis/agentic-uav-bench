@@ -64,7 +64,9 @@ class Vehicle:
         ints = {"NAV_DLL_ACT": 0,     # no GCS -> no datalink-loss failsafe
                 "NAV_RCL_ACT": 0,     # no RC  -> no RC-loss failsafe
                 "GF_ACTION": 0}       # PX4 geofence off: we measure the interface, not PX4
-        floats = {"COM_DISARM_PRFLT": 30.0}  # LLM latency can exceed default 10 s arm->takeoff
+        floats = {"COM_DISARM_PRFLT": 30.0,  # LLM latency can exceed default 10 s arm->takeoff
+                  "RTL_RETURN_ALT": 15.0,    # default 30 m would breach the 25 m envelope ceiling
+                  "RTL_DESCEND_ALT": 10.0}
         for k, v in ints.items():
             try:
                 await self.drone.param.set_param_int(k, v)

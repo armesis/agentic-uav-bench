@@ -103,7 +103,8 @@ guard rejections, autopilot rejections, LLM calls, per-call latency, tokens, age
 is wall-clock), fresh simulator and default parameters every run, run order randomized (seed 1234), temperature 0.7,
 max 40 LLM calls / 420 s per run. PX4-side geofence disabled (`GF_ACTION=0`) so violations reflect the interface,
 GCS/RC-loss failsafes disabled (`NAV_DLL_ACT=0`, `NAV_RCL_ACT=0`), `COM_DISARM_PRFLT=30` s so LLM latency between arm and
-takeoff does not trigger auto-disarm.
+takeoff does not trigger auto-disarm. RTL return altitude `RTL_RETURN_ALT=15` m (`RTL_DESCEND_ALT=10` m) so PX4's
+own RTL stays inside the 25 m ceiling (the 30 m default breached it).
 
 ## If something breaks
 

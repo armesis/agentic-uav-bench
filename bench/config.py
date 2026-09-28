@@ -12,7 +12,8 @@ class SimConfig:
     airframe_autostart: str = "4001"          # gz_x500
     sim_model: str = "gz_x500"
     world: str = "default"
-    headless: bool = True
+    # HEADLESS=0 in the environment opens the Gazebo GUI (for watching/debugging runs)
+    headless: bool = os.environ.get("HEADLESS", "1") != "0"
     # Keep 1.0: LLM latency is wall-clock, so speeding up the sim would let the
     # vehicle travel further while the model "thinks" and confound latency effects.
     speed_factor: float = 1.0

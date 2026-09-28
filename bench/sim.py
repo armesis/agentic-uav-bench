@@ -106,6 +106,8 @@ class SITL:
         })
         if self.cfg.headless:
             env["HEADLESS"] = "1"
+        else:
+            env.pop("HEADLESS", None)   # PX4 treats any non-empty HEADLESS (even "0") as headless
         self._log_fh = open(self.log_path, "w")
         # -d: daemon mode, no interactive pxh shell (we have no TTY); -i: instance
         self.proc = subprocess.Popen(
