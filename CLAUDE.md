@@ -23,6 +23,9 @@ Also check: AeroGen (arXiv 2603.14236), Koubaa & Gabr (arXiv 2509.13352), "Takin
 - Bring-up fixes are committed (gz-transport shadowing, C arm race, takeoff-altitude race, RTL 15 m); see RUNBOOK.md.
 - Nemotron-3-Nano-4B pilot, reasoning off (`pilot_nemotron_noreason/`, gitignored): A 0/2, B 0/2, C 2/2.
   `pilot_nemotron_mixed/` = reasoning toggled mid-run, exploratory only.
+- C x M1-M4 Nemotron pilot (`pilot_nemotron_C/`): M1, M2 pass; M3 fails (false RTL claim after BATTERY_LOW), M4 fails
+  (wrong corner). `pilot_nemotron_C_reloaded/` = silent LM Studio reload mid-batch, exploratory only.
+- LM Studio is supervised by `bench/lmstudio.py` (start/restart, context+TTL check, stops on reasoning tokens).
 - **How to run everything: RUNBOOK.md.**
 
 ## Next steps
