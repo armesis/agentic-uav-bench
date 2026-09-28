@@ -18,18 +18,17 @@ Also check: AeroGen (arXiv 2603.14236), Koubaa & Gabr (arXiv 2509.13352), "Takin
   guard $4) and a **local model via LM Studio** (Qwen/Nemo, context >= 16384) as a second factor.
 - Parallel batches via `--instance N` (separate PX4 instance, ports, GZ_PARTITION). Not yet verified on real hardware.
 
-## Status
-- Code written and passes `python -m tests.test_offline` (fake kinematic vehicle + mock LLMs).
-- **Not yet run against real PX4 SITL.** Expect first-contact issues in `bench/sim.py` (launch line, `-i`/rootfs paths,
-  Gazebo partition) and `bench/vehicle.py` (MAVSDK 3.17.4 gRPC API, `goto_location`, params).
+## Status (2026-09-28 evening)
+- Real PX4 SITL works (stock v1.17.0 in `PX4-Autopilot/`, Gazebo 8.15). Oracle: 8/8 on B,C x M1-M4, GUI and headless.
+- Bring-up fixes are committed (gz-transport shadowing, C arm race, takeoff-altitude race, RTL 15 m); see RUNBOOK.md.
+- Nemotron-3-Nano-4B pilot, reasoning off (`pilot_nemotron_noreason/`, gitignored): A 0/2, B 0/2, C 2/2.
+  `pilot_nemotron_mixed/` = reasoning toggled mid-run, exploratory only.
+- **How to run everything: RUNBOOK.md.**
 
 ## Next steps
-1. `python -m tests.test_offline`
-2. `python run.py --provider scripted --model oracle --conditions C --missions M1 --reps 1` -> debug SITL bring-up
-   with `results/*/px4.log` until the oracle passes all 4 missions on B and C.
-3. Two simultaneous oracle runs on `--instance 0` and `--instance 1` to validate parallel mode; check real-time factor.
-4. Pilot: 1 rep per condition with gpt-5.6-luna, inspect transcripts, then full batches.
-5. `python analyze.py` -> tables + figures; then write Results. Intro / Related Work / Method can be drafted now.
+1. Parallel smoke test (`--instance 0` + `--instance 1` oracle sweeps at once), check real-time factor.
+2. GPT pilot (needs `OPENAI_API_KEY`), inspect transcripts.
+3. Full batches (always pass `--model-notes`), then `python analyze.py` -> tables + figures -> Results.
 
 ## Conventions
 - Do not change mission definitions, metrics, or prompts after the full batch starts (it invalidates comparisons);
