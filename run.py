@@ -21,6 +21,7 @@ from pathlib import Path
 
 from bench.agent import run_one
 from bench.config import CFG
+from bench.lmstudio import LMStudio, LMStudioConfigError
 
 
 def main():
@@ -40,6 +41,10 @@ def main():
                     help="none|low|medium|high; default: 'none' for gpt-5.x/6 (required for tools on chat API)")
     ap.add_argument("--model-notes", default=None,
                     help="free text stored in every summary.json, e.g. 'reasoning off, Q4_K_M, RTX 3050 6GB'")
+    ap.add_argument("--lms-context", type=int, default=16384,
+                    help="lmstudio: required loaded context length (the supervisor reloads the model if it differs)")
+    ap.add_argument("--allow-reasoning", action="store_true",
+                    help="lmstudio: accept a model that produces reasoning tokens (default: stop the batch)")
     ap.add_argument("--budget-usd", type=float, default=4.0,
                     help="stop the batch when spend for this model (all runs in --out) reaches this")
     ap.add_argument("--px4-dir", default=None)
@@ -70,6 +75,17 @@ def main():
             tot += json.loads(p.read_text()).get("cost_usd") or 0.0
         return tot
 
+    lm = None
+    if args.provider == "lmstudio":
+        lm = LMStudio(args.model, context=args.lms_context,
+                      base_url=args.base_url or "http://localhost:1234/v1",
+                      allow_reasoning=args.allow_reasoning)
+        try:
+            print("[lmstudio]", lm.ensure())
+        except LMStudioConfigError as ex:
+            print("LM STUDIO CONFIG ERROR - not starting:", ex, file=sys.stderr)
+            return
+
     t0 = time.time()
     done_now = 0
     for i, (c, m, r) in enumerate(jobs, 1):
@@ -83,10 +99,22 @@ def main():
             if s.get("termination") != "harness_error" or not args.retry_errors:
                 print(f"[{i}/{len(jobs)}] skip {sp.parent.name} ({s.get('termination')})")
                 continue
-        s = asyncio.run(run_one(CFG, c, m, args.provider, args.model, r, out,
-                                temperature=temp, base_url=args.base_url,
-                                reasoning_effort=args.reasoning_effort,
-                                model_notes=args.model_notes))
+        def attempt():
+            info = lm.ensure() if lm else None
+            return asyncio.run(run_one(CFG, c, m, args.provider, args.model, r, out,
+                                       temperature=temp, base_url=args.base_url,
+                                       reasoning_effort=args.reasoning_effort,
+                                       model_notes=args.model_notes, runtime_info=info))
+        try:
+            s = attempt()
+            if lm and s.get("termination") == "harness_error" and "Connection" in (s.get("error") or ""):
+                # LM Studio crashed or reloaded mid-run: bring it back and redo this run once
+                print(f"   LM Studio connection lost during {s['run_id']} -> restarting it and retrying",
+                      file=sys.stderr)
+                s = attempt()
+        except LMStudioConfigError as ex:
+            print("LM STUDIO CONFIG ERROR - stopping batch:", ex, file=sys.stderr)
+            break
         done_now += 1
         el = (time.time() - t0) / 60
         cost = spent()

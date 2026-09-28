@@ -171,7 +171,7 @@ async def oracle_agent(cond, mission, ex, cfg, rec, stats):
 # ------------------------------------------------------------------ single run
 async def run_one(cfg: Config, cond: str, mission_id: str, provider: str, model: str,
                   rep: int, out_root: Path, temperature=0.7, base_url=None,
-                  reasoning_effort=None, model_notes=None) -> dict:
+                  reasoning_effort=None, model_notes=None, runtime_info=None) -> dict:
     mission = MISSIONS[mission_id]
     tag = model.replace("/", "_").replace(":", "_")
     run_id = f"{tag}__{cond}__{mission_id}__r{rep:02d}"
@@ -183,6 +183,8 @@ async def run_one(cfg: Config, cond: str, mission_id: str, provider: str, model:
     summary = {"run_id": run_id, "condition": cond, "mission": mission_id, "provider": provider,
                "model": model, "rep": rep, "temperature": temperature,
                "model_notes": model_notes}
+    if runtime_info is not None:
+        summary["lmstudio"] = runtime_info      # live model state checked right before this run
     sitl = SITL(cfg.sim, d / "px4.log")
     v = None
     backend = None

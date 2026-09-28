@@ -64,6 +64,22 @@ grep -h 'takeoff altitude' smoke/*/px4.log
 
 ## 4. Local model via LM Studio
 
+**The harness supervises LM Studio for you** (`bench/lmstudio.py`). With `--provider lmstudio`, before
+the batch and again before *every* run it:
+- starts the LM Studio app/server if the API doesn't answer (crash recovery);
+- makes sure the model is loaded with exactly `--lms-context` (default 16384) and no auto-unload TTL,
+  and reloads it otherwise;
+- sends a probe tool call and **stops the batch** if the model produces reasoning tokens (only the app can
+  change that toggle; pass `--allow-reasoning` if a reasoning batch is intended);
+- stores what was live in each `summary.json` under `"lmstudio"` (context, quantization, reasoning tokens,
+  restarts/reloads).
+
+If a run dies with a connection error (LM Studio crashed or reloaded mid-run), it restarts LM Studio and
+redoes that run once. Set the model's **default config in the app** (My Models -> gear: context 16384,
+reasoning off) so any reload LM Studio does on its own keeps the same settings.
+
+Manual steps (still useful for checking by hand):
+
 1. Load the model **from the CLI with an explicit context length**. If you let LM Studio auto-load it on
    the first request, it uses the default 4096 context, and a mission overflows it.
    ```bash
@@ -155,7 +171,8 @@ have to, bump a version tag and re-run everything.
 | `HEADLESS=0` still headless | PX4 treats *any* non-empty `HEADLESS` as headless. | Fixed: the harness unsets it when `HEADLESS=0`. |
 | `Received ack for not-existing command: 176! Ignoring...` in the terminal | MAVSDK noise (a duplicate `DO_SET_MODE` ACK). | Harmless; ignore. |
 | LM Studio run ends with `termination=context_overflow` | Model loaded with the default 4096 context. | Load with `lms load ... --context-length 16384` (step 4). |
-| Local-model latencies jump around mid-batch | Reasoning toggled, or model reloaded with different settings, during the batch. | Don't touch LM Studio while a batch runs; note settings in `--model-notes`. |
+| Local-model latencies jump around mid-batch; `lms ps` shows context 8192 and a TTL | LM Studio reloaded the model with its defaults (after a toggle/crash/idle unload); a reload also resets the reasoning toggle. | Now caught by the supervisor (reloads with the right context, stops on reasoning). Set the model's default config in the app. |
+| `LM STUDIO CONFIG ERROR ... producing reasoning tokens` | Reasoning is on in the app. | Turn it off in the app and in the model's default config, then re-run the same command. |
 | One run hung at ~0.5 m with all commands timing out (seen once, before the fixes above) | Not reproduced since (32 later runs were fine). | If it comes back: keep the run folder, check `px4.log` and `telemetry.csv`, and re-run with `--retry-errors`. |
 | `pip`: `cannot execute: required file not found` | Scripts left over from removed Python 3.9–3.11 installs. | Already cleaned; use `.venv/bin/python -m pip` or `python3 -m pip`. |
 | `git submodule update` hangs cloning `PX4-gazebo-models` | Slow GitHub download of a large repo. | Clone from a local copy: `git -c protocol.file.allow=always submodule update ...` with the URL pointed at px4_ws's module (see `~/.local/share/px4/README.md`). |
