@@ -1,0 +1,7 @@
+mavsdk==3.17.4
+openai>=1.40
+anthropic>=0.40
+numpy
+pandas
+scipy
+matplotlib
