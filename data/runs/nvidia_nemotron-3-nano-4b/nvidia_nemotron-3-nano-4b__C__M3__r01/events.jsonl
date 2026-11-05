@@ -1,0 +1,11 @@
+{"type": "llm", "t": 2.5590242530006435, "latency_s": 1.557, "in_tok": 1211, "cached_tok": 0, "out_tok": 46, "text": "I'll execute this mission step by step. First, I need to check if the vehicle is armed and then take off to 10 meters altitude.\n", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.5590312069998618, "t_end": 2.9969942540001284, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 3.9843592570005057, "latency_s": 0.987, "in_tok": 1392, "cached_tok": 0, "out_tok": 29, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":10}"]]}
+{"type": "command", "t": 3.9843692100002954, "t_end": 15.055908783000632, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 16.65078284900028, "latency_s": 1.595, "in_tok": 1560, "cached_tok": 0, "out_tok": 53, "text": "", "tool_calls": [["goto", "{\"north_m\":25,\"east_m\":-10,\"altitude_m\":10}"]]}
+{"type": "event", "name": "battery_low", "t": 23.88784481499988, "value": 18.0}
+{"type": "command", "t": 16.65079099400009, "t_end": 23.903261247000046, "name": "goto", "args": {"north_m": 25, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto interrupted: BATTERY_LOW (18% < 25%)"}
+{"type": "llm", "t": 25.357308792999902, "latency_s": 1.454, "in_tok": 1766, "cached_tok": 0, "out_tok": 48, "text": "I need to land immediately due to low battery (18% < 25% safety threshold). I'll perform an emergency return to launch.\n", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 25.357318446000136, "t_end": 54.70186754600036, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 56.28621372100042, "latency_s": 1.584, "in_tok": 1958, "cached_tok": 0, "out_tok": 51, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Mission aborted due to low battery (18% < 25% safety threshold). Vehicle returned to home and landed safely.\"}"]]}
+{"type": "command", "t": 56.28622026300036, "t_end": 56.28623505999985, "name": "mission_complete", "args": {"summary": "Mission aborted due to low battery (18% < 25% safety threshold). Vehicle returned to home and landed safely."}, "ok": true, "category": "ok", "message": "mission marked complete"}

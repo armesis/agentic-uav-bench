@@ -1,0 +1,11 @@
+{"type": "llm", "t": 2.2371037420089124, "latency_s": 1.235, "in_tok": 645, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.237111244001426, "t_end": 3.0630653870030073, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 4.220787908008788, "latency_s": 1.158, "in_tok": 776, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":10}"]]}
+{"type": "command", "t": 4.220797027999652, "t_end": 15.294382626001607, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 16.66494750500715, "latency_s": 1.371, "in_tok": 917, "cached_tok": 0, "out_tok": 29, "text": "", "tool_calls": [["goto", "{\"north_m\":25,\"east_m\":-10,\"altitude_m\":10}"]]}
+{"type": "event", "name": "battery_low", "t": 23.87488021599711, "value": 18.0}
+{"type": "command", "t": 16.664956403998076, "t_end": 23.913936696000746, "name": "goto", "args": {"north_m": 25, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto interrupted: BATTERY_LOW (18% < 25%)"}
+{"type": "llm", "t": 25.256828117009718, "latency_s": 1.343, "in_tok": 1076, "cached_tok": 0, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 25.25684358199942, "t_end": 55.19400499900803, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 56.716781556999194, "latency_s": 1.523, "in_tok": 1216, "cached_tok": 1073, "out_tok": 35, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Aborted the survey when battery fell below 25%; returned to launch and landed safely.\"}"]]}
+{"type": "command", "t": 56.71678714900918, "t_end": 56.71679924199998, "name": "mission_complete", "args": {"summary": "Aborted the survey when battery fell below 25%; returned to launch and landed safely."}, "ok": true, "category": "ok", "message": "mission marked complete"}

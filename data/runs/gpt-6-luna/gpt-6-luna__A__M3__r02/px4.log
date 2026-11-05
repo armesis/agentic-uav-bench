@@ -1,0 +1,81 @@
+INFO  [px4] instance: 0
+INFO  [px4] working directory /home/armesis/agentic-uav-bench/PX4-Autopilot/build/px4_sitl_default/rootfs/0
+
+______  __   __    ___ 
+| ___ \ \ \ / /   /   |
+| |_/ /  \ V /   / /| |
+|  __/   /   \  / /_| |
+| |     / /^\ \ \___  |
+\_|     \/   \/     |_/
+
+px4 starting.
+
+INFO  [px4] startup script: /bin/sh etc/init.d-posix/rcS 0
+env SYS_AUTOSTART: 4001
+INFO  [param] selected parameter default file parameters.bson
+INFO  [param] selected parameter backup file parameters_backup.bson
+  SYS_AUTOCONFIG: curr: 0 -> new: 1
+  SYS_AUTOSTART: curr: 0 -> new: 4001
+  CAL_ACC0_ID: curr: 0 -> new: 1310988
+  CAL_GYRO0_ID: curr: 0 -> new: 1310988
+  CAL_ACC1_ID: curr: 0 -> new: 1310996
+  CAL_GYRO1_ID: curr: 0 -> new: 1310996
+  CAL_ACC2_ID: curr: 0 -> new: 1311004
+  CAL_GYRO2_ID: curr: 0 -> new: 1311004
+  CAL_MAG0_ID: curr: 0 -> new: 197388
+  CAL_MAG0_PRIO: curr: -1 -> new: 50
+  CAL_MAG1_ID: curr: 0 -> new: 197644
+  CAL_MAG1_PRIO: curr: -1 -> new: 50
+  SENS_BOARD_X_OFF: curr: 0.0000 -> new: 0.0000
+  SENS_DPRES_OFF: curr: 0.0000 -> new: 0.0010
+COM_DL_LOSS_T set to 10.0
+COM_RC_LOSS_T set to 1.0
+  COM_RC_LOSS_T: curr: 0.5000 -> new: 1.0000
+COM_OF_LOSS_T set to 1.0
+COM_OBC_LOSS_T set to 5.0
+INFO  [dataman] data manager file './dataman' size is 1208528 bytes
+INFO  [init] Gazebo simulator 8.15.0
+INFO  [init] Starting gazebo with world: /home/armesis/agentic-uav-bench/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+INFO  [init] Waiting for Gazebo world...
+INFO  [init] Gazebo world is ready
+INFO  [init] Spawning Gazebo model
+[1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="x500_base"]/link[@name="base_link"]/sensor[@name="air_pressure_sensor"]/gz_frame_id:/home/armesis/agentic-uav-bench/PX4-Autopilot/Tools/simulation/gz/models/x500_base/model.sdf:L219]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="x500_base"]/link[@name="base_link"]/sensor[@name="magnetometer_sensor"]/gz_frame_id:/home/armesis/agentic-uav-bench/PX4-Autopilot/Tools/simulation/gz/models/x500_base/model.sdf:L233]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="x500_base"]/link[@name="base_link"]/sensor[@name="imu_sensor"]/gz_frame_id:/home/armesis/agentic-uav-bench/PX4-Autopilot/Tools/simulation/gz/models/x500_base/model.sdf:L259]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+[1;33mWarning [Utils.cc:132][0m [/sdf/model[@name="x500_base"]/link[@name="base_link"]/sensor[@name="navsat_sensor"]/gz_frame_id:/home/armesis/agentic-uav-bench/PX4-Autopilot/Tools/simulation/gz/models/x500_base/model.sdf:L311]: XML Element[gz_frame_id], child of element[sensor], not defined in SDF. Copying[gz_frame_id] as children of [sensor].
+INFO  [lockstep_scheduler] setting initial absolute time to 4196000 us
+INFO  [gz_bridge] world: default, model: x500_0
+INFO  [init] Setting simulation speed factor: 1.0
+INFO  [commander] LED: open /dev/led0 failed (22)
+WARN  [health_and_arming_checks] Preflight Fail: ekf2 missing data
+WARN  [health_and_arming_checks] Preflight Fail: system power unavailable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+INFO  [uxrce_dds_client] init UDP agent IP:127.0.0.1, port:8888
+INFO  [mavlink] mode: Normal, data rate: 4000000 B/s on udp port 18570 remote port 14550
+INFO  [tone_alarm] home set
+INFO  [mavlink] mode: Onboard, data rate: 4000000 B/s on udp port 14580 remote port 14540
+INFO  [mavlink] partner IP: 127.0.0.1
+INFO  [mavlink] mode: Onboard, data rate: 4000 B/s on udp port 14280 remote port 14030
+INFO  [mavlink] mode: Gimbal, data rate: 400000 B/s on udp port 13030 remote port 13280
+INFO  [logger] logger started (mode=all)
+INFO  [logger] Start file log (type: full)
+INFO  [logger] [logger] ./log/2026-09-29/16_49_51.ulg	
+INFO  [logger] Opened full log file: ./log/2026-09-29/16_49_51.ulg
+INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
+INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
+INFO  [px4] Startup script returned successfully
+INFO  [mavlink] partner IP: 127.0.0.1
+INFO  [commander] [32mReady for takeoff![0m
+INFO  [commander] Armed by external command	
+INFO  [tone_alarm] arming warning
+INFO  [navigator] Using default takeoff altitude: 10.0 m	
+INFO  [commander] Takeoff detected	
+INFO  [navigator] RTL: start return at 16 m (15 m above destination)	
+INFO  [navigator] RTL: land at destination	
+INFO  [commander] Landing detected	
+INFO  [commander] Disarmed by landing	
+INFO  [tone_alarm] notify neutral
+INFO  [logger] closed logfile, bytes written: 23175325
+
+PX4 Exiting...
+Exiting NOW.

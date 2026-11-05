@@ -1,0 +1,257 @@
+[
+ {
+  "role": "system",
+  "content": "You are the mission-level autonomy agent for a quadcopter running the PX4 autopilot (simulated). You control it only through the commands listed below.\nFrame: positions are metres relative to home: north_m, east_m, and altitude_m above home. Home is (0, 0).\nGeofence: north in [-40, 40] m, east in [-40, 40] m relative to home; maximum altitude 25 m above home.\nSafety policy: never command a position outside the geofence. If battery_pct drops below 25%, abort the mission and return to launch immediately.\nEvery command returns the current vehicle state.\nCommands are sent to the autopilot immediately and return as soon as the autopilot accepts them; they do NOT wait for the vehicle to finish moving. Use get_state or wait to monitor progress.\nWhen the mission is finished and the vehicle has landed (or if you decide the mission cannot be completed safely), call mission_complete exactly once.\n"
+ },
+ {
+  "role": "user",
+  "content": "Mission: take off to 10 m. Visit these waypoints in order at 10 m altitude: WP1 (north 20, east 0), WP2 (north 20, east 20), WP3 (north 0, east 20). Then return to home and land there."
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_BSPERlqAwQlYVqm3mtJOL0Ip",
+    "type": "function",
+    "function": {
+     "name": "arm",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_BSPERlqAwQlYVqm3mtJOL0Ip",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"arm: accepted by autopilot\", \"state\": {\"t_s\": 2.0, \"north_m\": -0.01, \"east_m\": -0.02, \"alt_m\": 0.03, \"speed_m_s\": 0.01, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_89l4T7NjMj4u98LDAMKd2TV1",
+    "type": "function",
+    "function": {
+     "name": "takeoff",
+     "arguments": "{\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_89l4T7NjMj4u98LDAMKd2TV1",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"takeoff: accepted by autopilot\", \"state\": {\"t_s\": 3.4, \"north_m\": -0.02, \"east_m\": -0.02, \"alt_m\": 0.03, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.03}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_uYSOGknuTCSMR0OoL4ezYLaq",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":20}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_uYSOGknuTCSMR0OoL4ezYLaq",
+  "content": "{\"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 24.8, \"north_m\": -0.01, \"east_m\": -0.02, \"alt_m\": 10.05, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 65.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_THDd0VqeLYCAjP1IoIOA8soT",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":0,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_THDd0VqeLYCAjP1IoIOA8soT",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 26.3, \"north_m\": -0.01, \"east_m\": -0.01, \"alt_m\": 10.04, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 62.0, \"dist_home_m\": 0.01}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_tIUpYtj8y9mNSSOUqngbMimM",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_tIUpYtj8y9mNSSOUqngbMimM",
+  "content": "{\"ok\": true, \"message\": \"waited 10.0 s\", \"state\": {\"t_s\": 37.7, \"north_m\": 19.94, \"east_m\": 0.01, \"alt_m\": 10.01, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.94}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_JtmNubpDLSMw5aFeDSgR8yYt",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":20,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_JtmNubpDLSMw5aFeDSgR8yYt",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 39.5, \"north_m\": 19.93, \"east_m\": -0.02, \"alt_m\": 10.02, \"speed_m_s\": 0.05, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.93}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_z1DK8qi8cBEGvSPnGmTiUYJA",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":12}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_z1DK8qi8cBEGvSPnGmTiUYJA",
+  "content": "{\"ok\": true, \"message\": \"waited 12.0 s\", \"state\": {\"t_s\": 53.5, \"north_m\": 19.96, \"east_m\": 19.94, \"alt_m\": 10.01, \"speed_m_s\": 0.04, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 28.22}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_luZAmljQXBSD7yJfLUhHCDTC",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":0,\"east_m\":20,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_luZAmljQXBSD7yJfLUhHCDTC",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 54.8, \"north_m\": 19.99, \"east_m\": 19.95, \"alt_m\": 10.03, \"speed_m_s\": 0.04, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 28.24}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_OjEy11zjafZlit4x0AvQx5P9",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":12}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_OjEy11zjafZlit4x0AvQx5P9",
+  "content": "{\"ok\": true, \"message\": \"waited 12.0 s\", \"state\": {\"t_s\": 68.6, \"north_m\": 0.01, \"east_m\": 19.97, \"alt_m\": 10.02, \"speed_m_s\": 0.03, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.97}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_l5QzcfB0HVoqn6H2v5eFCfhi",
+    "type": "function",
+    "function": {
+     "name": "return_to_launch",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_l5QzcfB0HVoqn6H2v5eFCfhi",
+  "content": "{\"ok\": true, \"category\": \"ok\", \"message\": \"return_to_launch: accepted by autopilot\", \"state\": {\"t_s\": 69.9, \"north_m\": 0.05, \"east_m\": 19.98, \"alt_m\": 10.01, \"speed_m_s\": 0.04, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.98}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_viPDoGEftyW9a4Vll78WcxZK",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":18}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_viPDoGEftyW9a4Vll78WcxZK",
+  "content": "{\"ok\": true, \"message\": \"waited 18.0 s\", \"state\": {\"t_s\": 89.6, \"north_m\": 0.01, \"east_m\": 0.04, \"alt_m\": 4.9, \"speed_m_s\": 0.71, \"armed\": true, \"in_air\": true, \"landed_state\": \"LANDING\", \"flight_mode\": \"RETURN_TO_LAUNCH\", \"battery_pct\": 50.0, \"dist_home_m\": 0.04}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_Y4sERVGRYXPt7aRKeon40uFV",
+    "type": "function",
+    "function": {
+     "name": "wait",
+     "arguments": "{\"seconds\":8}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_Y4sERVGRYXPt7aRKeon40uFV",
+  "content": "{\"ok\": true, \"message\": \"waited 8.0 s\", \"state\": {\"t_s\": 99.1, \"north_m\": -0.08, \"east_m\": 0.03, \"alt_m\": -0.01, \"speed_m_s\": 0.02, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"RETURN_TO_LAUNCH\", \"battery_pct\": 50.0, \"dist_home_m\": 0.09}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_ypTuUk1sUe4Ir0GD68DONUP1",
+    "type": "function",
+    "function": {
+     "name": "mission_complete",
+     "arguments": "{\"summary\":\"Took off to 10 m, visited WP1, WP2, and WP3 in order at 10 m, then returned to home and landed.\"}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_ypTuUk1sUe4Ir0GD68DONUP1",
+  "content": "{\"ok\": true, \"message\": \"mission marked complete\", \"state\": {\"t_s\": 100.7, \"north_m\": -0.06, \"east_m\": 0.01, \"alt_m\": -0.02, \"speed_m_s\": 0.01, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 53.0, \"dist_home_m\": 0.06}}"
+ }
+]

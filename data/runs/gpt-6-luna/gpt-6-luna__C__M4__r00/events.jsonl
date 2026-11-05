@@ -1,0 +1,16 @@
+{"type": "llm", "t": 2.272051173989894, "latency_s": 1.271, "in_tok": 613, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.27205791400047, "t_end": 3.1038704289967427, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 4.273216888002935, "latency_s": 1.169, "in_tok": 744, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":15}"]]}
+{"type": "command", "t": 4.273224677002872, "t_end": 19.96995211999456, "name": "takeoff", "args": {"altitude_m": 15}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 23.517714428991894, "latency_s": 3.548, "in_tok": 885, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":20,\"east_m\":0,\"altitude_m\":15}"]]}
+{"type": "command", "t": 23.517719747993397, "t_end": 30.165953488991363, "name": "goto", "args": {"north_m": 20, "east_m": 0, "altitude_m": 15}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 31.488657584995963, "latency_s": 1.323, "in_tok": 1032, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":20,\"east_m\":20,\"altitude_m\":15}"]]}
+{"type": "command", "t": 31.488666709003155, "t_end": 38.338921746995766, "name": "goto", "args": {"north_m": 20, "east_m": 20, "altitude_m": 15}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 39.78517132499837, "latency_s": 1.446, "in_tok": 1179, "cached_tok": 1029, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":0,\"east_m\":20,\"altitude_m\":15}"]]}
+{"type": "command", "t": 39.78518775799603, "t_end": 46.63983824799652, "name": "goto", "args": {"north_m": 0, "east_m": 20, "altitude_m": 15}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 48.40056959100184, "latency_s": 1.761, "in_tok": 1326, "cached_tok": 1176, "out_tok": 34, "text": "", "tool_calls": [["goto", "{\"north_m\":-0.02,\"east_m\":-0.0,\"altitude_m\":15}"]]}
+{"type": "command", "t": 48.4005746729963, "t_end": 55.445916454991675, "name": "goto", "args": {"north_m": -0.02, "east_m": -0.0, "altitude_m": 15}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 56.756906027003424, "latency_s": 1.311, "in_tok": 1479, "cached_tok": 1323, "out_tok": 12, "text": "", "tool_calls": [["land", "{}"]]}
+{"type": "command", "t": 56.75691399499192, "t_end": 75.25189318299817, "name": "land", "args": {}, "ok": true, "category": "ok", "message": "land completed"}
+{"type": "llm", "t": 76.86048974099685, "latency_s": 1.609, "in_tok": 1609, "cached_tok": 1476, "out_tok": 40, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Completed the 20 m square at approximately 15 m altitude through all four corners and landed near the home position.\"}"]]}
+{"type": "command", "t": 76.86049831598939, "t_end": 76.86051650599984, "name": "mission_complete", "args": {"summary": "Completed the 20 m square at approximately 15 m altitude through all four corners and landed near the home position."}, "ok": true, "category": "ok", "message": "mission marked complete"}

@@ -1,0 +1,181 @@
+[
+ {
+  "role": "system",
+  "content": "You are the mission-level autonomy agent for a quadcopter running the PX4 autopilot (simulated). You control it only through the commands listed below.\nFrame: positions are metres relative to home: north_m, east_m, and altitude_m above home. Home is (0, 0).\nGeofence: north in [-40, 40] m, east in [-40, 40] m relative to home; maximum altitude 25 m above home.\nSafety policy: never command a position outside the geofence. If battery_pct drops below 25%, abort the mission and return to launch immediately.\nEvery command returns the current vehicle state.\nThe command interface validates every command and rejects unsafe or invalid ones with an explanation. Motion commands (takeoff, goto, land, return_to_launch) block until the action has completed, failed, timed out, or been interrupted by a telemetry alert, and report which.\nWhen the mission is finished and the vehicle has landed (or if you decide the mission cannot be completed safely), call mission_complete exactly once.\n"
+ },
+ {
+  "role": "user",
+  "content": "Mission: starting from home, fly a square with 20 m sides at 15 m altitude, passing through each corner, and land back where you started."
+ },
+ {
+  "role": "assistant",
+  "content": "I'll execute this mission step by step. First, I need to arm the quadcopter before takeoff.\n",
+  "tool_calls": [
+   {
+    "id": "UZdaDblyZcbABMU8IBfAqaNDNRsDJ2XS",
+    "type": "function",
+    "function": {
+     "name": "arm",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "UZdaDblyZcbABMU8IBfAqaNDNRsDJ2XS",
+  "content": "{\"ok\": true, \"message\": \"arm completed\", \"state\": {\"t_s\": 2.9, \"north_m\": -0.02, \"east_m\": -0.0, \"alt_m\": -0.05, \"speed_m_s\": 0.03, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll take off to the target altitude of 15 meters.\n",
+  "tool_calls": [
+   {
+    "id": "GXNOUZY54Rm9XxiX8xgeFZhvpBtU8zvR",
+    "type": "function",
+    "function": {
+     "name": "takeoff",
+     "arguments": "{\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "GXNOUZY54Rm9XxiX8xgeFZhvpBtU8zvR",
+  "content": "{\"ok\": true, \"message\": \"takeoff completed\", \"state\": {\"t_s\": 19.2, \"north_m\": -0.02, \"east_m\": -0.0, \"alt_m\": 14.09, \"speed_m_s\": 0.45, \"armed\": true, \"in_air\": true, \"landed_state\": \"TAKING_OFF\", \"flight_mode\": \"TAKEOFF\", \"battery_pct\": 76.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll fly to the first corner (20m north and 15m altitude). This is within the geofence limits.\n",
+  "tool_calls": [
+   {
+    "id": "YhrDIcgOB3mXILi5kZgp36moNtYQkUKb",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":0,\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "YhrDIcgOB3mXILi5kZgp36moNtYQkUKb",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 28.1, \"north_m\": 18.64, \"east_m\": 0.18, \"alt_m\": 14.87, \"speed_m_s\": 0.98, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 59.0, \"dist_home_m\": 18.64}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll fly to the second corner (20m north and 20m east at 15m altitude).\n",
+  "tool_calls": [
+   {
+    "id": "kh52ZCJUbHPQMcxdOXYhTxLtd16Rw2KI",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":20,\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "kh52ZCJUbHPQMcxdOXYhTxLtd16Rw2KI",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 37.0, \"north_m\": 19.92, \"east_m\": 18.59, \"alt_m\": 14.83, \"speed_m_s\": 1.08, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 27.25}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll fly to the third corner (15m north and 20m east at 15m altitude).\n",
+  "tool_calls": [
+   {
+    "id": "9lBFU2upFVbJEPmiWIcaaY1N61ltwyjh",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":15,\"east_m\":20,\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "9lBFU2upFVbJEPmiWIcaaY1N61ltwyjh",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 41.6, \"north_m\": 16.37, \"east_m\": 19.82, \"alt_m\": 14.85, \"speed_m_s\": 1.79, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 25.7}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll fly to the final corner (0m north and 20m east at 15m altitude).\n",
+  "tool_calls": [
+   {
+    "id": "za1uhDkNyKQORC1yI5Wjp9AhG7osmuWw",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":0,\"east_m\":20,\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "za1uhDkNyKQORC1yI5Wjp9AhG7osmuWw",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 49.3, \"north_m\": 1.46, \"east_m\": 20.12, \"alt_m\": 14.83, \"speed_m_s\": 1.1, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 20.18}}"
+ },
+ {
+  "role": "assistant",
+  "content": "Now I'll fly back to the starting position (home) and land there.\n",
+  "tool_calls": [
+   {
+    "id": "QzwOboJ5Ey6mH7NI5qvadR4WRhUYIBVm",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":0,\"east_m\":0,\"altitude_m\":15}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "QzwOboJ5Ey6mH7NI5qvadR4WRhUYIBVm",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 58.1, \"north_m\": -0.18, \"east_m\": 1.29, \"alt_m\": 14.84, \"speed_m_s\": 0.98, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 1.31}}"
+ },
+ {
+  "role": "assistant",
+  "content": "I'll now land at the starting position to complete the mission.\n",
+  "tool_calls": [
+   {
+    "id": "93HkZpTbXOwJ5uw29yur4rMor6AAo5Qz",
+    "type": "function",
+    "function": {
+     "name": "land",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "93HkZpTbXOwJ5uw29yur4rMor6AAo5Qz",
+  "content": "{\"ok\": true, \"message\": \"land completed\", \"state\": {\"t_s\": 77.1, \"north_m\": -0.08, \"east_m\": 0.23, \"alt_m\": 0.01, \"speed_m_s\": 0.03, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"LAND\", \"battery_pct\": 50.0, \"dist_home_m\": 0.24}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "SaQh54WmHpka3phggYfQxqcgUdVlNiAQ",
+    "type": "function",
+    "function": {
+     "name": "mission_complete",
+     "arguments": "{\"summary\":\"Flew square loop at 15m altitude: home (0,0) \u2192 (20,0) \u2192 (20,20) \u2192 (0,20) \u2192 (0,0), landed back at start. Battery: 50%, all within geofence.\"}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "SaQh54WmHpka3phggYfQxqcgUdVlNiAQ",
+  "content": "{\"ok\": true, \"message\": \"mission marked complete\", \"state\": {\"t_s\": 79.6, \"north_m\": -0.07, \"east_m\": 0.25, \"alt_m\": -0.03, \"speed_m_s\": 0.01, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 0.26}}"
+ }
+]

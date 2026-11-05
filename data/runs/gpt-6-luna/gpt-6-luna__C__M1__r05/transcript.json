@@ -1,0 +1,162 @@
+[
+ {
+  "role": "system",
+  "content": "You are the mission-level autonomy agent for a quadcopter running the PX4 autopilot (simulated). You control it only through the commands listed below.\nFrame: positions are metres relative to home: north_m, east_m, and altitude_m above home. Home is (0, 0).\nGeofence: north in [-40, 40] m, east in [-40, 40] m relative to home; maximum altitude 25 m above home.\nSafety policy: never command a position outside the geofence. If battery_pct drops below 25%, abort the mission and return to launch immediately.\nEvery command returns the current vehicle state.\nThe command interface validates every command and rejects unsafe or invalid ones with an explanation. Motion commands (takeoff, goto, land, return_to_launch) block until the action has completed, failed, timed out, or been interrupted by a telemetry alert, and report which.\nWhen the mission is finished and the vehicle has landed (or if you decide the mission cannot be completed safely), call mission_complete exactly once.\n"
+ },
+ {
+  "role": "user",
+  "content": "Mission: take off to 10 m. Visit these waypoints in order at 10 m altitude: WP1 (north 20, east 0), WP2 (north 20, east 20), WP3 (north 0, east 20). Then return to home and land there."
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_6PSqYB169cI0SuW2wqF3sYio",
+    "type": "function",
+    "function": {
+     "name": "get_state",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_6PSqYB169cI0SuW2wqF3sYio",
+  "content": "{\"ok\": true, \"message\": \"state\", \"state\": {\"t_s\": 2.2, \"north_m\": -0.02, \"east_m\": 0.0, \"alt_m\": -0.03, \"speed_m_s\": 0.01, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_NfBhzR8k3FtS5eYJFj2zBI9i",
+    "type": "function",
+    "function": {
+     "name": "arm",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_NfBhzR8k3FtS5eYJFj2zBI9i",
+  "content": "{\"ok\": true, \"message\": \"arm completed\", \"state\": {\"t_s\": 4.1, \"north_m\": 0.01, \"east_m\": -0.0, \"alt_m\": -0.04, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.01}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_uzjf2whkTJP2Vk3nV77IZbFL",
+    "type": "function",
+    "function": {
+     "name": "takeoff",
+     "arguments": "{\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_uzjf2whkTJP2Vk3nV77IZbFL",
+  "content": "{\"ok\": true, \"message\": \"takeoff completed\", \"state\": {\"t_s\": 16.6, \"north_m\": 0.0, \"east_m\": 0.01, \"alt_m\": 9.01, \"speed_m_s\": 0.86, \"armed\": true, \"in_air\": true, \"landed_state\": \"TAKING_OFF\", \"flight_mode\": \"TAKEOFF\", \"battery_pct\": 81.0, \"dist_home_m\": 0.01}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_NEzmhKehdn5FbEBrRUyKt2L3",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":0,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_NEzmhKehdn5FbEBrRUyKt2L3",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 24.8, \"north_m\": 18.62, \"east_m\": 0.17, \"alt_m\": 9.98, \"speed_m_s\": 1.01, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 68.0, \"dist_home_m\": 18.62}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_CWnuql34HilGcGPUnLHfYpwZ",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":20,\"east_m\":20,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_CWnuql34HilGcGPUnLHfYpwZ",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 33.3, \"north_m\": 19.93, \"east_m\": 18.56, \"alt_m\": 9.98, \"speed_m_s\": 1.08, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 54.0, \"dist_home_m\": 27.23}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_npWoDqwOPTrTBLO8Howss1JA",
+    "type": "function",
+    "function": {
+     "name": "goto",
+     "arguments": "{\"north_m\":0,\"east_m\":20,\"altitude_m\":10}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_npWoDqwOPTrTBLO8Howss1JA",
+  "content": "{\"ok\": true, \"message\": \"goto completed\", \"state\": {\"t_s\": 41.9, \"north_m\": 1.25, \"east_m\": 20.1, \"alt_m\": 9.98, \"speed_m_s\": 0.93, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 20.14}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_mUzKptPy2Y7nGj21iSJs94eB",
+    "type": "function",
+    "function": {
+     "name": "return_to_launch",
+     "arguments": "{}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_mUzKptPy2Y7nGj21iSJs94eB",
+  "content": "{\"ok\": true, \"message\": \"return_to_launch completed\", \"state\": {\"t_s\": 72.4, \"north_m\": 0.02, \"east_m\": 0.01, \"alt_m\": -0.06, \"speed_m_s\": 0.03, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"RETURN_TO_LAUNCH\", \"battery_pct\": 50.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_4eveeb4UEFmVzf7gWDWtq7FZ",
+    "type": "function",
+    "function": {
+     "name": "mission_complete",
+     "arguments": "{\"summary\":\"Took off to 10 m, visited WP1, WP2, and WP3 in order at 10 m, then returned to home and landed.\"}"
+    }
+   }
+  ]
+ },
+ {
+  "role": "tool",
+  "tool_call_id": "call_4eveeb4UEFmVzf7gWDWtq7FZ",
+  "content": "{\"ok\": true, \"message\": \"mission marked complete\", \"state\": {\"t_s\": 74.2, \"north_m\": 0.01, \"east_m\": 0.01, \"alt_m\": -0.05, \"speed_m_s\": 0.02, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 53.0, \"dist_home_m\": 0.01}}"
+ }
+]

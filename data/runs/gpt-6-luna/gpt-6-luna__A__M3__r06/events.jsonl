@@ -1,0 +1,25 @@
+{"type": "llm", "t": 1.9013112649990944, "latency_s": 0.899, "in_tok": 549, "cached_tok": 0, "out_tok": 9, "text": "{\"cmd\":\"get_state\"}", "tool_calls": []}
+{"type": "command", "t": 1.901489916999708, "t_end": 1.90152031800244, "name": "get_state", "args": {}, "ok": true, "category": "ok", "message": "state"}
+{"type": "llm", "t": 3.1862410440080566, "latency_s": 1.285, "in_tok": 683, "cached_tok": 0, "out_tok": 8, "text": "{\"cmd\":\"arm\"}", "tool_calls": []}
+{"type": "command", "t": 3.186264730000403, "t_end": 3.208145119002438, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm: accepted by autopilot"}
+{"type": "llm", "t": 4.089078782009892, "latency_s": 0.881, "in_tok": 826, "cached_tok": 0, "out_tok": 9, "text": "{\"cmd\":\"get_state\"}", "tool_calls": []}
+{"type": "command", "t": 4.0890935310017085, "t_end": 4.08910622401163, "name": "get_state", "args": {}, "ok": true, "category": "ok", "message": "state"}
+{"type": "llm", "t": 5.428459900009329, "latency_s": 1.339, "in_tok": 960, "cached_tok": 0, "out_tok": 15, "text": "{\"cmd\":\"takeoff\",\"altitude_m\":10}", "tool_calls": []}
+{"type": "command", "t": 5.428482982009882, "t_end": 5.452100283000618, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff: accepted by autopilot"}
+{"type": "llm", "t": 6.43648307400872, "latency_s": 0.984, "in_tok": 1112, "cached_tok": 0, "out_tok": 12, "text": "{\"cmd\":\"wait\",\"seconds\":10}", "tool_calls": []}
+{"type": "command", "t": 6.43650877699838, "t_end": 16.43706554399978, "name": "wait", "args": {"seconds": 10}, "ok": true, "category": "ok", "message": "waited 10.0 s"}
+{"type": "llm", "t": 17.936808123005903, "latency_s": 1.5, "in_tok": 1255, "cached_tok": 1109, "out_tok": 12, "text": "{\"cmd\":\"wait\",\"seconds\":5}", "tool_calls": []}
+{"type": "command", "t": 17.93682134601113, "t_end": 22.937112280007568, "name": "wait", "args": {"seconds": 5}, "ok": true, "category": "ok", "message": "waited 5.0 s"}
+{"type": "llm", "t": 24.200978823006153, "latency_s": 1.264, "in_tok": 1397, "cached_tok": 1252, "out_tok": 25, "text": "{\"cmd\":\"goto\",\"north_m\":25,\"east_m\":-10,\"altitude_m\":10}", "tool_calls": []}
+{"type": "command", "t": 24.201005795010133, "t_end": 24.220121656006086, "name": "goto", "args": {"north_m": 25, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 25.297215650003636, "latency_s": 1.077, "in_tok": 1557, "cached_tok": 1394, "out_tok": 12, "text": "{\"cmd\":\"wait\",\"seconds\":15}", "tool_calls": []}
+{"type": "event", "name": "battery_low", "t": 31.446166706999065, "value": 18.0}
+{"type": "command", "t": 25.297240571002476, "t_end": 40.29735074999917, "name": "wait", "args": {"seconds": 15}, "ok": true, "category": "ok", "message": "waited 15.0 s"}
+{"type": "llm", "t": 41.39682298099797, "latency_s": 1.099, "in_tok": 1699, "cached_tok": 1554, "out_tok": 10, "text": "{\"cmd\":\"return_to_launch\"}", "tool_calls": []}
+{"type": "command", "t": 41.39684107100766, "t_end": 41.416103456998826, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch: accepted by autopilot"}
+{"type": "llm", "t": 42.36880033501075, "latency_s": 0.953, "in_tok": 1848, "cached_tok": 1696, "out_tok": 12, "text": "{\"cmd\":\"wait\",\"seconds\":20}", "tool_calls": []}
+{"type": "command", "t": 42.36881528000231, "t_end": 62.3690838170005, "name": "wait", "args": {"seconds": 20}, "ok": true, "category": "ok", "message": "waited 20.0 s"}
+{"type": "llm", "t": 63.449059391001356, "latency_s": 1.08, "in_tok": 1992, "cached_tok": 1845, "out_tok": 12, "text": "{\"cmd\":\"wait\",\"seconds\":10}", "tool_calls": []}
+{"type": "command", "t": 63.44908828500775, "t_end": 73.45016986400879, "name": "wait", "args": {"seconds": 10}, "ok": true, "category": "ok", "message": "waited 10.0 s"}
+{"type": "llm", "t": 74.83680131399888, "latency_s": 1.387, "in_tok": 2134, "cached_tok": 1989, "out_tok": 37, "text": "{\"cmd\":\"mission_complete\",\"summary\":\"Battery dropped below 25% at S1, so I aborted the survey and returned to launch. Vehicle landed at home.\"}", "tool_calls": []}
+{"type": "command", "t": 74.83681694600091, "t_end": 74.83683080101036, "name": "mission_complete", "args": {"summary": "Battery dropped below 25% at S1, so I aborted the survey and returned to launch. Vehicle landed at home."}, "ok": true, "category": "ok", "message": "mission marked complete"}

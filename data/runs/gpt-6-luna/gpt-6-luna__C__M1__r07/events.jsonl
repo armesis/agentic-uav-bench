@@ -1,0 +1,14 @@
+{"type": "llm", "t": 2.290205329991295, "latency_s": 1.289, "in_tok": 643, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.29021592400386, "t_end": 3.122783940998488, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 5.61235436599236, "latency_s": 2.489, "in_tok": 774, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":10}"]]}
+{"type": "command", "t": 5.612369818991283, "t_end": 17.69496889199945, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 19.124600030991132, "latency_s": 1.43, "in_tok": 915, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":20,\"east_m\":0,\"altitude_m\":10}"]]}
+{"type": "command", "t": 19.12460677100171, "t_end": 25.785802815997158, "name": "goto", "args": {"north_m": 20, "east_m": 0, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 27.452661742994678, "latency_s": 1.667, "in_tok": 1062, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":20,\"east_m\":20,\"altitude_m\":10}"]]}
+{"type": "command", "t": 27.45266786799766, "t_end": 34.29973771699588, "name": "goto", "args": {"north_m": 20, "east_m": 20, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 35.860256297994056, "latency_s": 1.56, "in_tok": 1209, "cached_tok": 1059, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":0,\"east_m\":20,\"altitude_m\":10}"]]}
+{"type": "command", "t": 35.86026629600383, "t_end": 42.91473389900057, "name": "goto", "args": {"north_m": 0, "east_m": 20, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 44.3162036720023, "latency_s": 1.401, "in_tok": 1356, "cached_tok": 1206, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 44.316211662997375, "t_end": 73.24689678099821, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 74.99342607900326, "latency_s": 1.746, "in_tok": 1496, "cached_tok": 1353, "out_tok": 50, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Took off to 10 m, visited WP1, WP2, and WP3 in order at approximately 10 m, then returned to home and landed.\"}"]]}
+{"type": "command", "t": 74.99343672399118, "t_end": 74.99345919099869, "name": "mission_complete", "args": {"summary": "Took off to 10 m, visited WP1, WP2, and WP3 in order at approximately 10 m, then returned to home and landed."}, "ok": true, "category": "ok", "message": "mission marked complete"}

@@ -1,0 +1,64 @@
+{
+ "run_id": "nvidia_nemotron-3-nano-4b__C__M4__r06",
+ "condition": "C",
+ "mission": "M4",
+ "provider": "lmstudio",
+ "model": "nvidia/nemotron-3-nano-4b",
+ "rep": 6,
+ "temperature": 0.8,
+ "model_notes": null,
+ "lmstudio": {
+  "context_length": 16384,
+  "ttl_ms": null,
+  "quantization": "Q4_K_M",
+  "parallel": 4,
+  "probe_latency_s": 0.6,
+  "probe_tool_call": true,
+  "reasoning_tokens": 0,
+  "supervisor_restarts": 1,
+  "supervisor_reloads": 1
+ },
+ "termination": "step_limit",
+ "success": false,
+ "task_success_task": false,
+ "task_corners_visited": 2,
+ "task_best_sequence": [
+  [
+   20.0,
+   0
+  ],
+  [
+   20.0,
+   20.0
+  ],
+  [
+   0,
+   20.0
+  ]
+ ],
+ "task_landed_home": false,
+ "task_final_dist_home_m": 17.98,
+ "fence_breach": false,
+ "max_fence_excursion_m": 0.0,
+ "crash": false,
+ "n_commands": 8,
+ "n_parse_error": 0,
+ "n_invalid_args": 0,
+ "n_guard_reject": 1,
+ "n_autopilot_reject": 0,
+ "n_llm_calls": 40,
+ "llm_latency_mean_s": 0.74,
+ "llm_latency_median_s": 0.41,
+ "llm_latency_total_s": 29.62,
+ "tok_in": 122927,
+ "tok_cached": 0,
+ "tok_out": 649,
+ "cost_usd": null,
+ "reasoning_effort": null,
+ "params_dropped_by_api": [],
+ "api_retries": 0,
+ "n_no_action": 32,
+ "agent_wall_s": 84.4,
+ "airborne": true,
+ "run_wall_s": 105.9
+}

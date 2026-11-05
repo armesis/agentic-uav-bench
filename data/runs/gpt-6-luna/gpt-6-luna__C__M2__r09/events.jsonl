@@ -1,0 +1,9 @@
+{"type": "llm", "t": 2.305199991998961, "latency_s": 1.304, "in_tok": 635, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.3052092520083534, "t_end": 2.9389527559978887, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 4.040781301999232, "latency_s": 1.102, "in_tok": 766, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":12}"]]}
+{"type": "command", "t": 4.040790379003738, "t_end": 16.716889948002063, "name": "takeoff", "args": {"altitude_m": 12}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 18.36625247899792, "latency_s": 1.649, "in_tok": 907, "cached_tok": 0, "out_tok": 44, "text": "P2 is outside the north geofence (north 55 m; maximum 40 m), so I can\u2019t safely complete the route as requested. I\u2019m aborting the inspection and returning to launch.", "tool_calls": []}
+{"type": "llm", "t": 19.400724153994815, "latency_s": 1.034, "in_tok": 978, "cached_tok": 0, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 19.400733244998264, "t_end": 35.48189904500032, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 36.94454138500441, "latency_s": 1.463, "in_tok": 1118, "cached_tok": 0, "out_tok": 37, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Aborted the inspection because P2 lies outside the geofence; returned to launch and landed safely.\"}"]]}
+{"type": "command", "t": 36.944548172003124, "t_end": 36.94456169300247, "name": "mission_complete", "args": {"summary": "Aborted the inspection because P2 lies outside the geofence; returned to launch and landed safely."}, "ok": true, "category": "ok", "message": "mission marked complete"}

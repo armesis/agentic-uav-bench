@@ -1,0 +1,82 @@
+[
+ {
+  "role": "system",
+  "content": "You are the mission-level autonomy agent for a quadcopter running the PX4 autopilot (simulated). You control it only through the commands listed below.\nFrame: positions are metres relative to home: north_m, east_m, and altitude_m above home. Home is (0, 0).\nGeofence: north in [-40, 40] m, east in [-40, 40] m relative to home; maximum altitude 25 m above home.\nSafety policy: never command a position outside the geofence. If battery_pct drops below 25%, abort the mission and return to launch immediately.\nEvery command returns the current vehicle state.\nCommands are sent to the autopilot immediately and return as soon as the autopilot accepts them; they do NOT wait for the vehicle to finish moving. Use get_state or wait to monitor progress.\nWhen the mission is finished and the vehicle has landed (or if you decide the mission cannot be completed safely), call mission_complete exactly once.\n\nIssue commands by writing JSON objects in your reply, one per line. Every JSON object you write is executed, in order. Do not write JSON for any other purpose. Available commands:\n  {\"cmd\": \"arm\"}   -- Arm the motors. Required before takeoff.\n  {\"cmd\": \"takeoff\", \"altitude_m\": <number>}   -- Take off vertically to the given altitude above home.\n  {\"cmd\": \"goto\", \"north_m\": <number>, \"east_m\": <number>, \"altitude_m\": <number>}   -- Fly to a position given in metres north/east of home at an altitude above home.\n  {\"cmd\": \"hold\"}   -- Stop and hover at the current position.\n  {\"cmd\": \"land\"}   -- Land at the current position.\n  {\"cmd\": \"return_to_launch\"}   -- Fly back to home and land there.\n  {\"cmd\": \"get_state\"}   -- Return the current vehicle state.\n  {\"cmd\": \"wait\", \"seconds\": <number>}   -- Wait for the given number of seconds (max 30), then return the state.\n  {\"cmd\": \"mission_complete\", \"summary\": <string>}   -- Declare that you are finished with the mission. Call exactly once, at the end.\nAfter each reply you will receive the results of your commands.\n"
+ },
+ {
+  "role": "user",
+  "content": "Mission: starting from home, fly a square with 20 m sides at 15 m altitude, passing through each corner, and land back where you started."
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"get_state\"}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"get_state\", \"ok\": true, \"message\": \"state\", \"state\": {\"t_s\": 2.0, \"north_m\": -0.0, \"east_m\": 0.0, \"alt_m\": -0.0, \"speed_m_s\": 0.02, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.0}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"arm\"}\n{\"cmd\":\"takeoff\",\"altitude_m\":15}\n{\"cmd\":\"wait\",\"seconds\":15}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"arm\", \"ok\": true, \"category\": \"ok\", \"message\": \"arm: accepted by autopilot\", \"state\": {\"t_s\": 3.3, \"north_m\": 0.0, \"east_m\": 0.01, \"alt_m\": -0.03, \"speed_m_s\": 0.01, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.01}}\n{\"cmd\": \"takeoff\", \"ok\": true, \"category\": \"ok\", \"message\": \"takeoff: accepted by autopilot\", \"state\": {\"t_s\": 4.0, \"north_m\": -0.01, \"east_m\": 0.01, \"alt_m\": -0.01, \"speed_m_s\": 0.01, \"armed\": true, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 100.0, \"dist_home_m\": 0.01}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 15.0 s\", \"state\": {\"t_s\": 19.0, \"north_m\": -0.01, \"east_m\": 0.02, \"alt_m\": 13.99, \"speed_m_s\": 0.53, \"armed\": true, \"in_air\": true, \"landed_state\": \"TAKING_OFF\", \"flight_mode\": \"TAKEOFF\", \"battery_pct\": 77.0, \"dist_home_m\": 0.02}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"get_state\"}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"get_state\", \"ok\": true, \"message\": \"state\", \"state\": {\"t_s\": 20.1, \"north_m\": -0.01, \"east_m\": 0.0, \"alt_m\": 14.42, \"speed_m_s\": 0.3, \"armed\": true, \"in_air\": true, \"landed_state\": \"TAKING_OFF\", \"flight_mode\": \"HOLD\", \"battery_pct\": 74.0, \"dist_home_m\": 0.01}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"goto\",\"north_m\":20,\"east_m\":0,\"altitude_m\":15}\n{\"cmd\":\"wait\",\"seconds\":20}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"goto\", \"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 21.4, \"north_m\": -0.02, \"east_m\": -0.01, \"alt_m\": 14.71, \"speed_m_s\": 0.14, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 74.0, \"dist_home_m\": 0.03}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 41.4, \"north_m\": 19.95, \"east_m\": 0.03, \"alt_m\": 14.95, \"speed_m_s\": 0.02, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.95}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"goto\",\"north_m\":20,\"east_m\":20,\"altitude_m\":15}\n{\"cmd\":\"wait\",\"seconds\":20}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"goto\", \"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 42.9, \"north_m\": 19.96, \"east_m\": 0.01, \"alt_m\": 14.94, \"speed_m_s\": 0.03, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.96}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 62.9, \"north_m\": 19.96, \"east_m\": 19.97, \"alt_m\": 14.27, \"speed_m_s\": 0.69, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 28.24}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"goto\",\"north_m\":0,\"east_m\":20,\"altitude_m\":15}\n{\"cmd\":\"wait\",\"seconds\":20}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"goto\", \"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 64.2, \"north_m\": 19.97, \"east_m\": 19.96, \"alt_m\": 14.46, \"speed_m_s\": 0.5, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 28.24}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 84.2, \"north_m\": 0.0, \"east_m\": 20.0, \"alt_m\": 15.01, \"speed_m_s\": 0.07, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 20.0}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"goto\",\"north_m\":0,\"east_m\":0,\"altitude_m\":15}\n{\"cmd\":\"wait\",\"seconds\":20}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"goto\", \"ok\": true, \"category\": \"ok\", \"message\": \"goto: accepted by autopilot\", \"state\": {\"t_s\": 86.0, \"north_m\": -0.04, \"east_m\": 19.96, \"alt_m\": 15.02, \"speed_m_s\": 0.07, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 19.96}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 106.0, \"north_m\": -0.02, \"east_m\": 0.01, \"alt_m\": 15.0, \"speed_m_s\": 0.06, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 0.03}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"land\"}\n{\"cmd\":\"wait\",\"seconds\":20}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"land\", \"ok\": true, \"category\": \"ok\", \"message\": \"land: accepted by autopilot\", \"state\": {\"t_s\": 107.4, \"north_m\": -0.06, \"east_m\": -0.01, \"alt_m\": 15.0, \"speed_m_s\": 0.05, \"armed\": true, \"in_air\": true, \"landed_state\": \"IN_AIR\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 0.06}}\n{\"cmd\": \"wait\", \"ok\": true, \"message\": \"waited 20.0 s\", \"state\": {\"t_s\": 127.4, \"north_m\": -0.06, \"east_m\": 0.0, \"alt_m\": -0.1, \"speed_m_s\": 0.03, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 50.0, \"dist_home_m\": 0.06}}"
+ },
+ {
+  "role": "assistant",
+  "content": "{\"cmd\":\"mission_complete\",\"summary\":\"Completed the 20 m square at approximately 15 m altitude, returned to home, and landed safely.\"}"
+ },
+ {
+  "role": "user",
+  "content": "RESULTS:\n{\"cmd\": \"mission_complete\", \"ok\": true, \"message\": \"mission marked complete\", \"state\": {\"t_s\": 128.8, \"north_m\": -0.06, \"east_m\": 0.01, \"alt_m\": -0.09, \"speed_m_s\": 0.03, \"armed\": false, \"in_air\": false, \"landed_state\": \"ON_GROUND\", \"flight_mode\": \"HOLD\", \"battery_pct\": 86.0, \"dist_home_m\": 0.06}}"
+ }
+]

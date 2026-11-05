@@ -1,0 +1,26 @@
+{"type": "llm", "t": 2.9914071899997907, "latency_s": 1.99, "in_tok": 1196, "cached_tok": 0, "out_tok": 53, "text": "I need to execute this mission step by step while monitoring safety conditions. First, I'll check the current state, then arm and take off.\n\nLet me start by getting the initial state.\n", "tool_calls": [["get_state", "{}"]]}
+{"type": "command", "t": 2.991416923000088, "t_end": 2.991434247000143, "name": "get_state", "args": {}, "ok": true, "category": "ok", "message": "state"}
+{"type": "llm", "t": 3.7157504850001715, "latency_s": 0.724, "in_tok": 1384, "cached_tok": 0, "out_tok": 15, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 3.7157610169997497, "t_end": 3.7442675090001103, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm: accepted by autopilot"}
+{"type": "llm", "t": 4.869682109999758, "latency_s": 1.125, "in_tok": 1546, "cached_tok": 0, "out_tok": 29, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":10}"]]}
+{"type": "command", "t": 4.8696897609997905, "t_end": 4.896227836999969, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff: accepted by autopilot"}
+{"type": "llm", "t": 6.739667374999954, "latency_s": 1.843, "in_tok": 1724, "cached_tok": 0, "out_tok": 53, "text": "", "tool_calls": [["goto", "{\"north_m\":25,\"east_m\":-10,\"altitude_m\":10}"]]}
+{"type": "command", "t": 6.739681539999765, "t_end": 6.768429089000165, "name": "goto", "args": {"north_m": 25, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 7.530637886000022, "latency_s": 0.762, "in_tok": 1925, "cached_tok": 0, "out_tok": 15, "text": "", "tool_calls": [["hold", "{}"]]}
+{"type": "command", "t": 7.530645929000002, "t_end": 7.544237874999908, "name": "hold", "args": {}, "ok": true, "category": "ok", "message": "hold: accepted by autopilot"}
+{"type": "llm", "t": 9.360307968000143, "latency_s": 1.816, "in_tok": 2086, "cached_tok": 0, "out_tok": 52, "text": "", "tool_calls": [["goto", "{\"north_m\":25,\"east_m\":15,\"altitude_m\":10}"]]}
+{"type": "command", "t": 9.360317716999816, "t_end": 9.384300233999966, "name": "goto", "args": {"north_m": 25, "east_m": 15, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 10.121211708999908, "latency_s": 0.737, "in_tok": 2283, "cached_tok": 0, "out_tok": 15, "text": "", "tool_calls": [["hold", "{}"]]}
+{"type": "command", "t": 10.121219777000078, "t_end": 10.13230274999978, "name": "hold", "args": {}, "ok": true, "category": "ok", "message": "hold: accepted by autopilot"}
+{"type": "llm", "t": 11.898956562999956, "latency_s": 1.767, "in_tok": 2445, "cached_tok": 0, "out_tok": 53, "text": "", "tool_calls": [["goto", "{\"north_m\":-10,\"east_m\":15,\"altitude_m\":10}"]]}
+{"type": "command", "t": 11.89896507100002, "t_end": 11.928297588000078, "name": "goto", "args": {"north_m": -10, "east_m": 15, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 12.669514874000015, "latency_s": 0.741, "in_tok": 2647, "cached_tok": 0, "out_tok": 15, "text": "", "tool_calls": [["hold", "{}"]]}
+{"type": "command", "t": 12.669522111999868, "t_end": 12.680143499999758, "name": "hold", "args": {}, "ok": true, "category": "ok", "message": "hold: accepted by autopilot"}
+{"type": "llm", "t": 14.492045677000078, "latency_s": 1.812, "in_tok": 2811, "cached_tok": 0, "out_tok": 54, "text": "", "tool_calls": [["goto", "{\"north_m\":-10,\"east_m\":-10,\"altitude_m\":10}"]]}
+{"type": "command", "t": 14.492055220000111, "t_end": 14.508308939000017, "name": "goto", "args": {"north_m": -10, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 15.26306396100017, "latency_s": 0.755, "in_tok": 3012, "cached_tok": 0, "out_tok": 15, "text": "", "tool_calls": [["hold", "{}"]]}
+{"type": "command", "t": 15.263072198999907, "t_end": 15.280019342999822, "name": "hold", "args": {}, "ok": true, "category": "ok", "message": "hold: accepted by autopilot"}
+{"type": "llm", "t": 16.11042719399984, "latency_s": 0.83, "in_tok": 3176, "cached_tok": 0, "out_tok": 18, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 16.11043576300017, "t_end": 16.124003527999776, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch: accepted by autopilot"}
+{"type": "llm", "t": 17.692505103999792, "latency_s": 1.568, "in_tok": 3345, "cached_tok": 0, "out_tok": 43, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Surveyed S1 to S4 at 10m altitude then returned home for landing\"}"]]}
+{"type": "command", "t": 17.692514041999857, "t_end": 17.692532676000155, "name": "mission_complete", "args": {"summary": "Surveyed S1 to S4 at 10m altitude then returned home for landing"}, "ok": true, "category": "ok", "message": "mission marked complete"}

@@ -1,0 +1,53 @@
+{
+ "run_id": "gpt-6-luna__C__M4__r05",
+ "condition": "C",
+ "mission": "M4",
+ "provider": "openai",
+ "model": "gpt-6-luna",
+ "rep": 5,
+ "temperature": 0.7,
+ "model_notes": null,
+ "termination": "complete",
+ "success": true,
+ "task_success_task": true,
+ "task_corners_visited": 3,
+ "task_best_sequence": [
+  [
+   20.0,
+   0
+  ],
+  [
+   20.0,
+   20.0
+  ],
+  [
+   0,
+   20.0
+  ]
+ ],
+ "task_landed_home": true,
+ "task_final_dist_home_m": 0.23,
+ "fence_breach": false,
+ "max_fence_excursion_m": 0.0,
+ "crash": false,
+ "n_commands": 8,
+ "n_parse_error": 0,
+ "n_invalid_args": 0,
+ "n_guard_reject": 0,
+ "n_autopilot_reject": 0,
+ "n_llm_calls": 8,
+ "llm_latency_mean_s": 1.231,
+ "llm_latency_median_s": 1.175,
+ "llm_latency_total_s": 9.85,
+ "tok_in": 8855,
+ "tok_cached": 4998,
+ "tok_out": 193,
+ "cost_usd": 0.00076932,
+ "reasoning_effort": "none",
+ "params_dropped_by_api": [],
+ "api_retries": 0,
+ "n_no_action": 0,
+ "agent_wall_s": 71.5,
+ "airborne": true,
+ "run_wall_s": 93.2
+}

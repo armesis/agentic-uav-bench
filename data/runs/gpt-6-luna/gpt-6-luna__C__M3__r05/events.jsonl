@@ -1,0 +1,13 @@
+{"type": "llm", "t": 2.30475450999802, "latency_s": 1.303, "in_tok": 645, "cached_tok": 0, "out_tok": 13, "text": "", "tool_calls": [["get_state", "{}"]]}
+{"type": "command", "t": 2.304763535008533, "t_end": 2.3047859579965007, "name": "get_state", "args": {}, "ok": true, "category": "ok", "message": "state"}
+{"type": "llm", "t": 4.508535316999769, "latency_s": 2.204, "in_tok": 777, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 4.508546532000764, "t_end": 4.937933274006355, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 6.768875777997891, "latency_s": 1.831, "in_tok": 908, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":10}"]]}
+{"type": "command", "t": 6.768884727003751, "t_end": 17.842963237009826, "name": "takeoff", "args": {"altitude_m": 10}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 19.24974942400877, "latency_s": 1.407, "in_tok": 1049, "cached_tok": 0, "out_tok": 29, "text": "", "tool_calls": [["goto", "{\"north_m\":25,\"east_m\":-10,\"altitude_m\":10}"]]}
+{"type": "event", "name": "battery_low", "t": 26.519135980997817, "value": 18.0}
+{"type": "command", "t": 19.249755311000627, "t_end": 26.702748569005053, "name": "goto", "args": {"north_m": 25, "east_m": -10, "altitude_m": 10}, "ok": true, "category": "ok", "message": "goto interrupted: BATTERY_LOW (18% < 25%)"}
+{"type": "llm", "t": 28.245935209008167, "latency_s": 1.543, "in_tok": 1208, "cached_tok": 1046, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 28.245943260000786, "t_end": 58.372996086996864, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 59.86088848300278, "latency_s": 1.488, "in_tok": 1348, "cached_tok": 1205, "out_tok": 35, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Aborted the survey when battery fell below 25%; returned to launch and landed safely.\"}"]]}
+{"type": "command", "t": 59.86089763500786, "t_end": 59.86092130700126, "name": "mission_complete", "args": {"summary": "Aborted the survey when battery fell below 25%; returned to launch and landed safely."}, "ok": true, "category": "ok", "message": "mission marked complete"}

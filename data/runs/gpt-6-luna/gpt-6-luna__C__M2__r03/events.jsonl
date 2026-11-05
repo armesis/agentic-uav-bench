@@ -1,0 +1,11 @@
+{"type": "llm", "t": 2.090184518994647, "latency_s": 1.088, "in_tok": 635, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.090192566989572, "t_end": 3.1115681109949946, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 4.268852067994885, "latency_s": 1.157, "in_tok": 766, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":12}"]]}
+{"type": "command", "t": 4.268857620991184, "t_end": 16.9548472109891, "name": "takeoff", "args": {"altitude_m": 12}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 18.659999250987312, "latency_s": 1.705, "in_tok": 907, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":15,\"east_m\":15,\"altitude_m\":12}"]]}
+{"type": "command", "t": 18.660009751998587, "t_end": 25.50673478198587, "name": "goto", "args": {"north_m": 15, "east_m": 15, "altitude_m": 12}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 27.078124097999535, "latency_s": 1.571, "in_tok": 1054, "cached_tok": 0, "out_tok": 41, "text": "P1 inspected. P2 is outside the north geofence (north limit 40 m), so I can\u2019t safely continue the requested route. I\u2019m aborting and returning to launch.", "tool_calls": []}
+{"type": "llm", "t": 29.185033035988454, "latency_s": 2.107, "in_tok": 1122, "cached_tok": 1051, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 29.185043489997042, "t_end": 56.11369682798977, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 57.732543595993775, "latency_s": 1.619, "in_tok": 1262, "cached_tok": 1119, "out_tok": 40, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Inspected P1, aborted because P2 lies outside the north geofence, and returned to home and landed.\"}"]]}
+{"type": "command", "t": 57.73255076199712, "t_end": 57.73256669798866, "name": "mission_complete", "args": {"summary": "Inspected P1, aborted because P2 lies outside the north geofence, and returned to home and landed."}, "ok": true, "category": "ok", "message": "mission marked complete"}

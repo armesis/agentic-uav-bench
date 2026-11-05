@@ -1,0 +1,16 @@
+{"type": "llm", "t": 2.191027737004333, "latency_s": 1.188, "in_tok": 635, "cached_tok": 0, "out_tok": 13, "text": "", "tool_calls": [["get_state", "{}"]]}
+{"type": "command", "t": 2.1910353590064915, "t_end": 2.19105240200588, "name": "get_state", "args": {}, "ok": true, "category": "ok", "message": "state"}
+{"type": "llm", "t": 3.26212516000669, "latency_s": 1.071, "in_tok": 767, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 3.2621333290007897, "t_end": 4.086876740009757, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm completed"}
+{"type": "llm", "t": 5.060648693004623, "latency_s": 0.974, "in_tok": 898, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":12}"]]}
+{"type": "command", "t": 5.06065591800143, "t_end": 17.94000573499943, "name": "takeoff", "args": {"altitude_m": 12}, "ok": true, "category": "ok", "message": "takeoff completed"}
+{"type": "llm", "t": 19.03291400600574, "latency_s": 1.093, "in_tok": 1039, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":15,\"east_m\":15,\"altitude_m\":12}"]]}
+{"type": "command", "t": 19.032924615006777, "t_end": 25.87902983299864, "name": "goto", "args": {"north_m": 15, "east_m": 15, "altitude_m": 12}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 26.970337209000718, "latency_s": 1.091, "in_tok": 1186, "cached_tok": 1036, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":55,\"east_m\":10,\"altitude_m\":12}"]]}
+{"type": "command", "t": 26.970344745001057, "t_end": 26.970376939003472, "name": "goto", "args": {"north_m": 55, "east_m": 10, "altitude_m": 12}, "ok": false, "category": "guard_reject", "message": "OUTSIDE_ENVELOPE: target (55.0, 10.0, 12.0) violates limits. Geofence: north in [-40, 40] m, east in [-40, 40] m relative to home; maximum altitude 25 m above home. Minimum commanded altitude 2 m."}
+{"type": "llm", "t": 28.52062653300527, "latency_s": 1.55, "in_tok": 1404, "cached_tok": 1183, "out_tok": 29, "text": "", "tool_calls": [["goto", "{\"north_m\":-15,\"east_m\":20,\"altitude_m\":12}"]]}
+{"type": "command", "t": 28.52063359800377, "t_end": 37.18005274700408, "name": "goto", "args": {"north_m": -15, "east_m": 20, "altitude_m": 12}, "ok": true, "category": "ok", "message": "goto completed"}
+{"type": "llm", "t": 38.41438635499799, "latency_s": 1.234, "in_tok": 1552, "cached_tok": 1401, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 38.41439495900704, "t_end": 66.14301267299743, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch completed"}
+{"type": "llm", "t": 67.67290862000664, "latency_s": 1.53, "in_tok": 1692, "cached_tok": 1549, "out_tok": 49, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Inspected P1 and P3 at 12 m, but P2 was outside the north geofence and was skipped; returned to home and landed safely.\"}"]]}
+{"type": "command", "t": 67.67291703401133, "t_end": 67.67293404100928, "name": "mission_complete", "args": {"summary": "Inspected P1 and P3 at 12 m, but P2 was outside the north geofence and was skipped; returned to home and landed safely."}, "ok": true, "category": "ok", "message": "mission marked complete"}

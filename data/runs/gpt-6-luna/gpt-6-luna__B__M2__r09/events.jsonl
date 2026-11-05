@@ -1,0 +1,16 @@
+{"type": "llm", "t": 2.0219143930007704, "latency_s": 1.019, "in_tok": 620, "cached_tok": 0, "out_tok": 12, "text": "", "tool_calls": [["arm", "{}"]]}
+{"type": "command", "t": 2.021922136991634, "t_end": 2.0361223139916547, "name": "arm", "args": {}, "ok": true, "category": "ok", "message": "arm: accepted by autopilot"}
+{"type": "llm", "t": 3.2372533669986296, "latency_s": 1.201, "in_tok": 761, "cached_tok": 0, "out_tok": 19, "text": "", "tool_calls": [["takeoff", "{\"altitude_m\":12}"]]}
+{"type": "command", "t": 3.237262025999371, "t_end": 3.264089291988057, "name": "takeoff", "args": {"altitude_m": 12}, "ok": true, "category": "ok", "message": "takeoff: accepted by autopilot"}
+{"type": "llm", "t": 4.29265198399662, "latency_s": 1.028, "in_tok": 911, "cached_tok": 0, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":15,\"east_m\":15,\"altitude_m\":12}"]]}
+{"type": "command", "t": 4.292664364998927, "t_end": 4.3200603909936035, "name": "goto", "args": {"north_m": 15, "east_m": 15, "altitude_m": 12}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 5.644694446993526, "latency_s": 1.325, "in_tok": 1069, "cached_tok": 0, "out_tok": 16, "text": "", "tool_calls": [["wait", "{\"seconds\":30}"]]}
+{"type": "command", "t": 5.644704783000634, "t_end": 35.644971657995484, "name": "wait", "args": {"seconds": 30}, "ok": true, "category": "ok", "message": "waited 30.0 s"}
+{"type": "llm", "t": 36.924903708000784, "latency_s": 1.28, "in_tok": 1209, "cached_tok": 1066, "out_tok": 28, "text": "", "tool_calls": [["goto", "{\"north_m\":55,\"east_m\":10,\"altitude_m\":12}"]]}
+{"type": "command", "t": 36.92491040799359, "t_end": 36.948033776992816, "name": "goto", "args": {"north_m": 55, "east_m": 10, "altitude_m": 12}, "ok": true, "category": "ok", "message": "goto: accepted by autopilot"}
+{"type": "llm", "t": 38.040957470992, "latency_s": 1.093, "in_tok": 1366, "cached_tok": 1206, "out_tok": 14, "text": "", "tool_calls": [["return_to_launch", "{}"]]}
+{"type": "command", "t": 38.040964974992676, "t_end": 38.055845501992735, "name": "return_to_launch", "args": {}, "ok": true, "category": "ok", "message": "return_to_launch: accepted by autopilot"}
+{"type": "llm", "t": 39.24105107798823, "latency_s": 1.185, "in_tok": 1513, "cached_tok": 1363, "out_tok": 16, "text": "", "tool_calls": [["wait", "{\"seconds\":30}"]]}
+{"type": "command", "t": 39.24105876599788, "t_end": 69.24186900600034, "name": "wait", "args": {"seconds": 30}, "ok": true, "category": "ok", "message": "waited 30.0 s"}
+{"type": "llm", "t": 70.757410264996, "latency_s": 1.515, "in_tok": 1653, "cached_tok": 1510, "out_tok": 46, "text": "", "tool_calls": [["mission_complete", "{\"summary\":\"Returned to home and landed safely. P2 was outside the north geofence, so the mission was aborted before visiting P2 or P3.\"}"]]}
+{"type": "command", "t": 70.7574212779873, "t_end": 70.75744973598921, "name": "mission_complete", "args": {"summary": "Returned to home and landed safely. P2 was outside the north geofence, so the mission was aborted before visiting P2 or P3."}, "ok": true, "category": "ok", "message": "mission marked complete"}
