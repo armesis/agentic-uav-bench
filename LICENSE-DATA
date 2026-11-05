@@ -1,0 +1,14 @@
+Data and figures (data/, figures/, slides/)
+Copyright (c) 2026 Ahmed O. Mahamoud, Yunes Alqudsi (Kocaeli University)
+
+Licensed under the Creative Commons Attribution 4.0 International License
+(CC BY 4.0). You may share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the license, and
+indicate if changes were made.
+
+Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:         https://creativecommons.org/licenses/by/4.0/
+
+Suggested credit: A. O. Mahamoud and Y. Alqudsi, "Does the Interface Matter? A
+Comparative Study of Command Interfaces for Large Language Model Agents Piloting
+a PX4 UAV," ATEEC 2026. Data: https://github.com/armesis/agentic-uav-bench
